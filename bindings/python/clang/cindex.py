@@ -1067,6 +1067,14 @@ CursorKind.NULL_STMT = CursorKind(230)
 # Adaptor class for mixing declarations with statements and expressions.
 CursorKind.DECL_STMT = CursorKind(231)
 
+CursorKind.OBJC_ARRAY_LITERAL_STMT = CursorKind(265)
+
+CursorKind.OBJC_DICTIONARY_LITERAL_STMT = CursorKind(266)
+
+CursorKind.OBJC_BOXED_EXPR_STMT = CursorKind(267)
+
+CursorKind.IMPLICIT_CAST_EXPR_STMT = CursorKind(268)
+
 ###
 # Other Kinds
 

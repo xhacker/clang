@@ -4838,9 +4838,17 @@ CXString clang_getCursorKindSpelling(enum CXCursorKind Kind) {
   case CXCursor_OMPDistributeDirective:
     return cxstring::createRef("OMPDistributeDirective");
   case CXCursor_OverloadCandidate:
-      return cxstring::createRef("OverloadCandidate");
+    return cxstring::createRef("OverloadCandidate");
   case CXCursor_TypeAliasTemplateDecl:
-      return cxstring::createRef("TypeAliasTemplateDecl");
+    return cxstring::createRef("TypeAliasTemplateDecl");
+  case CXCursor_ObjCArrayLiteral:
+    return cxstring::createRef("ObjCArrayLiteral");
+  case CXCursor_ObjCDictionaryLiteral:
+    return cxstring::createRef("ObjCDictionaryLiteral");
+  case CXCursor_ObjCBoxedExpr:
+    return cxstring::createRef("ObjCBoxedExpr");
+  case CXCursor_ImplicitCastExpr:
+    return cxstring::createRef("ImplicitCastExpr");
   }
 
   llvm_unreachable("Unhandled CXCursorKind");

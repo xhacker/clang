@@ -246,7 +246,13 @@ CXCursor cxcursor::MakeCXCursor(const Stmt *S, const Decl *Parent,
   case Stmt::ExprWithCleanupsClass:
   case Stmt::ExpressionTraitExprClass:
   case Stmt::ExtVectorElementExprClass:
+    K = CXCursor_UnexposedExpr;
+    break;
+
   case Stmt::ImplicitCastExprClass:
+    K = CXCursor_ImplicitCastExpr;
+    break;
+
   case Stmt::ImplicitValueInitExprClass:
   case Stmt::NoInitExprClass:
   case Stmt::MaterializeTemporaryExprClass:
@@ -258,9 +264,21 @@ CXCursor cxcursor::MakeCXCursor(const Stmt *S, const Decl *Parent,
   case Stmt::ConvertVectorExprClass:
   case Stmt::UnaryExprOrTypeTraitExprClass:
   case Stmt::VAArgExprClass:
+    K = CXCursor_UnexposedExpr;
+    break;
+
   case Stmt::ObjCArrayLiteralClass:
+    K = CXCursor_ObjCArrayLiteral;
+    break;
+
   case Stmt::ObjCDictionaryLiteralClass:
+    K = CXCursor_ObjCDictionaryLiteral;
+    break;
+
   case Stmt::ObjCBoxedExprClass:
+    K = CXCursor_ObjCBoxedExpr;
+    break;
+
   case Stmt::ObjCSubscriptRefExprClass:
     K = CXCursor_UnexposedExpr;
     break;
