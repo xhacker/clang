@@ -961,10 +961,10 @@ CursorKind.SIZE_OF_PACK_EXPR = CursorKind(143)
 CursorKind.LAMBDA_EXPR = CursorKind(144)
 
 # Objective-c Boolean Literal.
-CursorKind.OBJ_BOOL_LITERAL_EXPR = CursorKind(145)
+CursorKind.OBJC_BOOL_LITERAL_EXPR = CursorKind(145)
 
 # Represents the "self" expression in a ObjC method.
-CursorKind.OBJ_SELF_EXPR = CursorKind(146)
+CursorKind.OBJC_SELF_EXPR = CursorKind(146)
 
 
 # A statement whose specific kind is not exposed via this interface.

@@ -4189,6 +4189,15 @@ CXString clang_getCursorSpelling(CXCursor C) {
         C.kind == CXCursor_CompoundAssignOperator) {
       return clang_Cursor_getBinaryOpcodeStr(clang_Cursor_getBinaryOpcode(C));
     }
+    
+    if (C.kind == CXCursor_ObjCBoolLiteralExpr) {
+      const ObjCBoolLiteralExpr *OBLE = cast<ObjCBoolLiteralExpr>(E);
+      return cxstring::createRef(OBLE->getValue() ? "YES" : "NO");
+    }
+    
+    if (C.kind == CXCursor_ObjCSelfExpr) {
+      return cxstring::createRef("self");
+    }
 
     const Decl *D = getDeclFromExpr(getCursorExpr(C));
     if (D)
