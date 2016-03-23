@@ -4185,6 +4185,11 @@ CXString clang_getCursorSpelling(CXCursor C) {
       return cxstring::createDup(OS.str());
     }
 
+    if (C.kind == CXCursor_BinaryOperator ||
+        C.kind == CXCursor_CompoundAssignOperator) {
+      return clang_Cursor_getBinaryOpcodeStr(clang_Cursor_getBinaryOpcode(C));
+    }
+
     const Decl *D = getDeclFromExpr(getCursorExpr(C));
     if (D)
       return getDeclSpelling(D);
@@ -7246,6 +7251,29 @@ unsigned clang_Cursor_isVariadic(CXCursor C) {
     return MD->isVariadic();
 
   return 0;
+}
+
+enum CX_BinaryOperatorKind clang_Cursor_getBinaryOpcode(CXCursor C) {
+	if (C.kind != CXCursor_BinaryOperator &&
+		C.kind != CXCursor_CompoundAssignOperator) {
+		return CX_BO_Invalid;
+	}
+
+	const Expr *D = getCursorExpr(C);
+	if (const BinaryOperator *BinOp = dyn_cast<BinaryOperator>(D)) {
+		return static_cast<CX_BinaryOperatorKind>(BinOp->getOpcode() + 1);
+	}
+
+	return CX_BO_Invalid;
+}
+
+CXString clang_Cursor_getBinaryOpcodeStr(enum CX_BinaryOperatorKind Op) {
+	if (Op > CX_BO_LAST) {
+		return cxstring::createEmpty();
+	}
+
+	return cxstring::createDup(
+			BinaryOperator::getOpcodeStr(static_cast<BinaryOperatorKind>(Op - 1)));
 }
 
 CXSourceRange clang_Cursor_getCommentRange(CXCursor C) {

@@ -3949,6 +3949,53 @@ CINDEX_LINKAGE unsigned clang_Cursor_isObjCOptional(CXCursor C);
  */
 CINDEX_LINKAGE unsigned clang_Cursor_isVariadic(CXCursor C);
 
+enum CX_BinaryOperatorKind {
+  CX_BO_Invalid = 0,
+  CX_BO_PtrMemD = 1,
+  CX_BO_PtrMemI = 2,
+  CX_BO_Mul = 3,
+  CX_BO_Div = 4,
+  CX_BO_Rem = 5,
+  CX_BO_Add = 6,
+  CX_BO_Sub = 7,
+  CX_BO_Shl = 8,
+  CX_BO_Shr = 9,
+  CX_BO_LT = 10,
+  CX_BO_GT = 11,
+  CX_BO_LE = 12,
+  CX_BO_GE = 13,
+  CX_BO_EQ = 14,
+  CX_BO_NE = 15,
+  CX_BO_And = 16,
+  CX_BO_Xor = 17,
+  CX_BO_Or = 18,
+  CX_BO_LAnd = 19,
+  CX_BO_LOr = 20,
+  CX_BO_Assign = 21,
+  CX_BO_MulAssign = 22,
+  CX_BO_DivAssign = 23,
+  CX_BO_RemAssign = 24,
+  CX_BO_AddAssign = 25,
+  CX_BO_SubAssign = 26,
+  CX_BO_ShlAssign = 27,
+  CX_BO_ShrAssign = 29,
+  CX_BO_AndAssign = 29,
+  CX_BO_XorAssign = 30,
+  CX_BO_OrAssign = 31,
+  CX_BO_Comma = 32,
+  CX_BO_LAST = CX_BO_Comma
+};
+
+/**
+ * \brief Returns the operator code for the binary operator.
+ */
+CINDEX_LINKAGE enum CX_BinaryOperatorKind clang_Cursor_getBinaryOpcode(CXCursor C);
+
+/**
+ * \brief Returns a string containing the spelling of the binary operator.
+ */
+CINDEX_LINKAGE CXString clang_Cursor_getBinaryOpcodeStr(enum CX_BinaryOperatorKind Op);
+
 /**
  * \brief Given a cursor that represents a declaration, return the associated
  * comment's source range.  The range may include multiple consecutive comments

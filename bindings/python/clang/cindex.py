@@ -1296,6 +1296,18 @@ class Cursor(Structure):
         return StorageClass.from_id(self._storage_class)
 
     @property
+    def binary_operator(self):
+        """
+        Retrieves the opcode if this cursor points to a binary operator
+        :return:
+        """
+
+        if not hasattr(self, '_binopcode'):
+            self._binopcode = conf.lib.clang_Cursor_getBinaryOpcode(self)
+
+        return BinaryOperator.from_id(self._binopcode)
+
+    @property
     def access_specifier(self):
         """
         Retrieves the access specifier (if any) of the entity pointed at by the
@@ -1573,6 +1585,60 @@ class Cursor(Structure):
 
         res._tu = args[0]._tu
         return res
+
+class BinaryOperator(BaseEnumeration):
+    """
+    Describes the BinaryOperator of a declaration
+    """
+
+    # The unique kind objects, index by id.
+    _kinds = []
+    _name_map = None
+
+    def __nonzero__(self):
+        """ Allows checks of the kind ```if cursor.binary_operator:```"""
+        return self.value != 0
+
+    @property
+    def is_assignment(self):
+        return BinaryOperator.Assign.value <= self.value < BinaryOperator.Comma.value
+
+    def __repr__(self):
+        return 'BinaryOperator.%s' % (self.name,)
+
+BinaryOperator.Invalid = BinaryOperator(0)
+BinaryOperator.PtrMemD = BinaryOperator(1)
+BinaryOperator.PtrMemI = BinaryOperator(2)
+BinaryOperator.Mul = BinaryOperator(3)
+BinaryOperator.Div = BinaryOperator(4)
+BinaryOperator.Rem = BinaryOperator(5)
+BinaryOperator.Add = BinaryOperator(6)
+BinaryOperator.Sub = BinaryOperator(7)
+BinaryOperator.Shl = BinaryOperator(8)
+BinaryOperator.Shr = BinaryOperator(9)
+BinaryOperator.LT = BinaryOperator(10)
+BinaryOperator.GT = BinaryOperator(11)
+BinaryOperator.LE = BinaryOperator(12)
+BinaryOperator.GE = BinaryOperator(13)
+BinaryOperator.EQ = BinaryOperator(14)
+BinaryOperator.NE = BinaryOperator(15)
+BinaryOperator.And = BinaryOperator(16)
+BinaryOperator.Xor = BinaryOperator(17)
+BinaryOperator.Or = BinaryOperator(18)
+BinaryOperator.LAnd = BinaryOperator(19)
+BinaryOperator.LOr = BinaryOperator(20)
+BinaryOperator.Assign = BinaryOperator(21)
+BinaryOperator.MulAssign = BinaryOperator(22)
+BinaryOperator.DivAssign = BinaryOperator(23)
+BinaryOperator.RemAssign = BinaryOperator(24)
+BinaryOperator.AddAssign = BinaryOperator(25)
+BinaryOperator.SubAssign = BinaryOperator(26)
+BinaryOperator.ShlAssign = BinaryOperator(27)
+BinaryOperator.ShrAssign = BinaryOperator(28)
+BinaryOperator.AndAssign = BinaryOperator(29)
+BinaryOperator.XorAssign = BinaryOperator(30)
+BinaryOperator.OrAssign = BinaryOperator(31)
+BinaryOperator.Comma = BinaryOperator(32)
 
 class StorageClass(object):
     """

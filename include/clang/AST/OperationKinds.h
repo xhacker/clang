@@ -309,7 +309,8 @@ static const CastKind CK_Invalid = static_cast<CastKind>(-1);
 
 enum BinaryOperatorKind {
   // Operators listed in order of precedence.
-  // Note that additions to this should also update the StmtVisitor class.
+  // Note that additions to this should also update the StmtVisitor class
+  // and the C bindings in libclang.
   BO_PtrMemD, BO_PtrMemI,       // [C++ 5.5] Pointer-to-member operators.
   BO_Mul, BO_Div, BO_Rem,       // [C99 6.5.5] Multiplicative operators.
   BO_Add, BO_Sub,               // [C99 6.5.6] Additive operators.
