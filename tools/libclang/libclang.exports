@@ -141,6 +141,7 @@ clang_getArrayElementType
 clang_getArraySize
 clang_getBuildSessionTimestamp
 clang_getCString
+clang_getCStyleCastTargetType
 clang_getCXTUResourceUsage
 clang_getCXXAccessSpecifier
 clang_getCanonicalCursor

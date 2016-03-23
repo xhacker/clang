@@ -1478,6 +1478,9 @@ class Cursor(Structure):
         """Returns the value of the indicated arg as an unsigned 64b integer."""
         return conf.lib.clang_Cursor_getTemplateArgumentUnsignedValue(self, num)
 
+    def get_cstyle_cast_target_type(self):
+        return conf.lib.clang_getCStyleCastTargetType(self)
+
     def get_children(self):
         """Return an iterator for accessing the children of this cursor."""
 
@@ -3042,6 +3045,10 @@ functionList = [
   ("clang_getCString",
    [_CXString],
    c_char_p),
+
+  ("clang_getCStyleCastTargetType",
+   [Cursor],
+   Type),
 
   ("clang_getCursor",
    [TranslationUnit, SourceLocation],

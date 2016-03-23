@@ -7460,6 +7460,11 @@ CXType clang_getIBOutletCollectionType(CXCursor C) {
   
   return cxtype::MakeCXType(A->getInterface(), cxcursor::getCursorTU(C));  
 }
+
+CXType clang_getCStyleCastTargetType(CXCursor C) {
+  const CStyleCastExpr *E = cast<CStyleCastExpr>(cxcursor::getCursorExpr(C));
+  return cxtype::MakeCXType(E->getType(), cxcursor::getCursorTU(C));
+}
 } // end: extern "C"
 
 //===----------------------------------------------------------------------===//

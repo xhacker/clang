@@ -3581,6 +3581,8 @@ CINDEX_LINKAGE CXCursor clang_getOverloadedDecl(CXCursor cursor,
  */
 CINDEX_LINKAGE CXType clang_getIBOutletCollectionType(CXCursor);
 
+CINDEX_LINKAGE CXType clang_getCStyleCastTargetType(CXCursor);
+
 /**
  * @}
  */
